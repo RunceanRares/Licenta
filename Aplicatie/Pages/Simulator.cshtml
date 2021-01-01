@@ -1,0 +1,243 @@
+﻿@page
+@model SimulatorModel
+@{
+    ViewData["Title"] = "Simulator";
+}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   
+    <link rel="stylesheet" href="css/StyleSheet.css">
+
+</head>
+
+<div  id="settings-container">
+    <h2 style="text-align:center">Simulator for glucose</h2>
+</div>
+ 
+<div class="loader" id="main-loader"></div>
+
+     <header id="site-header"></header> 
+
+<div class="jumbotron">
+    <div class="form-container">
+        <form id="parameters-form">
+
+            <!-- <div class="parameters-group" id="group-1">
+          <div class="parameters-heading">
+              <a href="#help?1" class="fa fa-question-circle help-link"></a>
+              <h3>The plant's model</h3>
+          </div>-->
+
+
+            <div class="parameters-group-heading">
+                <a href="#help?1" class="fa fa-question-circle help-link"></a>
+                <h3 style="text-align:center"> Parameters of the minimal model</h3>
+            </div>
+            </br>
+
+            <div class="col-lg-4" class="form-row">
+                <div class="form-field">
+                    <label><span class="var">G<sub>b</sub></span> <span class="unit">[mg/dL]</span></label>
+                    <input type="number" name="G_b" id="param___G_b" value="81">
+                    <div class="hint">The basal value of blood glucose concentration</div>
+                </div></br>
+
+                <div class="form-field">
+                    <label><span class="var">p</span><sub>1</sub> <span class="unit">[1/min]</span></label>
+                    <input type="number" name="p_1" id="param___p_1" value="0">
+                    <div class="hint">Insulin-independent rate of tissue glucose uptake</div>
+                </div></br>
+            </div>
+
+
+            <div class="col-lg-4" class="form-row">
+                <div class="form-field">
+                    <label><span class="var">p</span><sub>2</sub> <span class="unit">[1/min]</span></label>
+                    <input type="number" name="p_2" id="param___p_2" value="0.025">
+                    <div class="hint">Active insulin decrease rate</div>
+                </div></br>
+
+                <div class="form-field">
+                    <label><span class="var">p</span><sub>3</sub> <span class="unit">[dL/(mU&#215;min<sup>2</sup>)]</span> </label>
+                    <input type="number" name="p_3" id="param___p_3" value="0.000013">
+                    <div class="hint">Insulin-dependent increase of tissue glucose uptake</div>
+                </div></br>
+            </div>
+
+
+            <div class="col-lg-4" class="form-row">
+                <div class="form-field">
+                    <label><span class="var">p</span><sub>4</sub> <span class="unit">[1/min]</span></label>
+                    <input type="number" name="p_4" id="param___p_4" value="0.0926">
+                    <div class="hint">Decay rate of blood insulin</div>
+                </div></br>
+                <div class="form-field">
+                    <label><span class="var">V</span><sub> </sub> <span class="unit">[dL]</span></label>
+                    <input type="number" name="V" id="param___V" value="120">
+                    <div class="hint">The total blood volume</div>
+                </div></br></br>
+            </div>
+
+            <!--Paragraf de date 2-->
+            <div class="parameters-group-heading">
+                <a href="#help?2" class="fa fa-question-circle help-link"></a>
+                <h3 style="text-align:center"> Additional parameters in the linearized model</h3>
+            </div></br>
+
+
+            <div class="col-md-4" class="form-row">
+                <div class="form-field">
+                    <label><span class="var" style="text-decoration:overline;">G</span> <span class="unit">[mg/dL]</span></label>
+                    <input type="number" name="G__" id="param___G___" value="81">
+                    <div class="hint">The "nominal" value of blood glucose concentration</div>
+                </div>
+                <div  class="form-field">
+                    <label><span class="var" style="text-decoration:overline;">X</span> <span class="unit">[mg/dL]</span></label>
+                    <input type="number" name="X__" id="param___X___" value="0">
+                    <div class="hint">The "nominal" value of the insulin concentration in the "remote" compartment</div>
+                </div></br>
+            </div>
+
+
+            <!--   <div class="dataset-select" data-dataset-group="1" data-params-group="#group-1">
+           <a href="#" class="fa fa-folder-open dataset-select-toggle"></a>
+           <span class="current-dataset">Dataset: Custom</span>
+           <ul>
+               <li>
+                   <a href="#help?3" class="fa fa-question-circle help-link"></a>
+                   <a href="#" class="load-dataset" data-dataset="0">Default configuration</a>
+                   <div class="hint r-hint">Default configuration [Chee-2009]</div>
+               </li>
+           </ul>
+       </div>-->
+            </br></br></br></br></br></br></br>
+
+
+
+            <div class="parameters-group" id="group-2">
+                <div class="parameters-heading">
+                    <a href="#help?1" class="fa fa-question-circle help-link"></a>
+                    <h3 style="text-align:center">The control system</h3>
+                </div></br>
+
+
+                <!--   <div class="parameters-group-heading">
+            <a href="#help?3" class="fa fa-question-circle help-link"></a>
+            Settings for the table-based Mamdani inference
+        </div></br>-->
+
+                <div style="text-align:center" class="form-row">
+                    <div class="form-field-2x">
+                        <label><span style="font-weight:bold;">G</span><sub><span style="font-style:italic;">P</span></sub> <span class="unit">[mg/dL]</span></label>
+                        <input type="edit" name="G_P" id="param___G_P" value="80,90,100,120,140,160,200,240,280,360">
+                        <div class="hint">The array of pattern values for blood glucose concentration (comma separated numbers)</div>
+                    </div>
+                </div>
+            </div></br>
+            <!-- <div class="parameters-group-heading">
+            <a href="#help?3" class="fa fa-question-circle help-link"></a>
+            Settings for the adaptation mechanism
+        </div></br>
+
+
+    <div class="dataset-select" data-dataset-group="2" data-params-group="#group-2">
+            <a href="#" class="fa fa-folder-open dataset-select-toggle"></a>
+            <span class="current-dataset" data-permalink="">Dataset: Custom</span>
+            <ul>
+                <li>
+                    <a href="#help?3" class="fa fa-question-circle help-link"></a>
+                    <a href="#" class="load-dataset" data-dataset="0">Default</a>
+                    <div class="hint r-hint">Default configuration</div>
+                </li>
+            </ul>
+        </div>-->
+
+
+
+            <div class="parameters-group" id="group-3">
+                <div class="parameters-heading">
+                    <a href="#help?3" class="fa fa-question-circle help-link"></a>
+                    <h3 style="text-align:center"> Scenario</h3>
+                </div>
+
+                <div style="text-align:center" class="parameters-group-heading">
+                    <a href="#help?2" class="fa fa-question-circle help-link"></a>
+                    <p style="text-align:center">Initial conditions</p>
+                </div>
+
+                <div style="text-align:center" class="form-row">
+                    <div class="form-field">
+                        <label><span style="font-style:italic;">G</span><sub>0</sub> <span class="unit">[mg/dL]</span></label>
+                        <input type="number" name="G_0" id="param___G_0" value="300">
+                        <div class="hint">The initial value of blood glucose concentration</div>
+                    </div>
+                </div>
+            </div>
+            <!--  <div class="dataset-select" data-dataset-group="3" data-params-group="#group-3">
+          <a href="#" class="fa fa-folder-open dataset-select-toggle"></a>
+          <span class="current-dataset">Dataset: Custom</span>
+          <ul>
+              <li>
+                  <a href="#help?3" class="fa fa-question-circle help-link"></a>
+                  <a href="#" class="load-dataset" data-dataset="0">Default</a>
+                  <div class="hint r-hint">High initial glycaemia level</div>
+              </li>
+          </ul>
+      </div>-->
+
+
+
+
+            <div class="parameters-group" id="group-9">
+                <div class="parameters-heading">
+                    <a href="#help?1" class="fa fa-question-circle help-link"></a>
+                    <h3 style="text-align:center">  Simulation</h3>
+                </div>
+
+                <div class="parameters-group-heading">
+                    <a href="#help?3" class="fa fa-question-circle help-link"></a>
+                    <p style="text-align:center"> Simulation parameters</p>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="col-md-4" class="form-field">
+                        <label><span class="var">T<sub>max</sub></span> <span class="unit">[min]</span></label>
+                        <input type="number" name="T_max" id="param___T_max" value="180">
+                        <div class="hint">Simulation stop time</div>
+                    </div>
+                    <div  class="form-field">
+                        <label><span class="var">T<sub>e</sub></span> <span class="unit">[sec]</span></label>
+                        <input type="number" name="T_e" id="param___T_e" value="1">
+                        <div class="hint">The fundamental sampling time</div>
+                    </div>
+                    <div class="col-lg-6" class="form-row">
+                        <div class="form-field">
+                            <label><span class="var">T<sub>e,c</sub></span> <span class="unit">[min]</span></label>
+                            <input type="number" name="T_e_c" id="param___T_e_c" value="5">
+                            <div class="hint">The controller sampling time</div>
+                        </div>
+                    </div>
+                </div>
+                <!--  <div class="dataset-select open-up" data-dataset-group="9" data-params-group="#group-9">
+              <a href="#" class="fa fa-folder-open dataset-select-toggle"></a>
+              <span class="current-dataset">Dataset: Custom</span>
+              <ul>
+                  <li>
+                      <a href="#help?3" class="fa fa-question-circle help-link"></a>
+                      <a href="#" class="load-dataset" data-dataset="0">Default</a>
+                      <div class="hint r-hint">3 hours simulation, 1 second sampling time, 5 minutes controller's sampling time</div>
+                  </li>
+                  <li>
+                      <a href="#help?3" class="fa fa-question-circle help-link"></a>
+                      <a href="#" class="load-dataset" data-dataset="1">Custom dataset 1</a>
+                      <div class="hint r-hint">3 hours simulation, 1 second sampling time, 1 minute controller's sampling time</div>
+                  </li>
+              </ul>
+          </div>-->
+            </div>
+            </div>
+        </form>
+</div>
+</div>
